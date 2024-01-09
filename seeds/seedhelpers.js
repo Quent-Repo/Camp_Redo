@@ -1,4 +1,4 @@
-const descriptions =[
+module.exports.descriptions =[
     'forest',
     'silent',
     'redwood',
@@ -9,7 +9,7 @@ const descriptions =[
 
 ]
 
-const places =[
+module.exports.places =[
     'governance',
     'admission',
     'engagement',
