@@ -1,9 +1,22 @@
 <% layout('layouts/page')%>
     <h2>test</h2>
-    <button><a href="campgrounds/new">New campground</a></button>
+    <button type="button" class="btn btn-success " ><a class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="campgrounds/new">New campground</a></button>
     <ul>
         <% for (let campground of campgrounds) {%>
-        <li><a href="campgrounds/<%= campground._id %> "><%= campground.title %></a></li>
+            <div class="card" style="width: 18rem;">
+                <img src="<%= campground.image%>" class="img-thumbnail" alt="...">
+              
+                <li class="card" mb-3>
+                    <div calss="col-md-8">
+                        <div class="card-body">
+                            <p class="card-title"><%=campground.title%></p>
+                            <p calss="card-text"><small class="text-muted"><%=campground.location%></small></p>
+                <button type="button" class="btn btn-primary" ><a class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="campgrounds/<%= campground._id %> ">
+                <%= campground.title %></a></button>
+            </div>
+                </div>
+                </li>
+            </div>
         <%  }%>  
     </ul>
     <br>
