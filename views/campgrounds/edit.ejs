@@ -1,12 +1,12 @@
 <% layout('layouts/page')%>
-    <form action="/campgrounds/<%=campground._id%>?_method=PUT" method="POST">
+    <form action="/campgrounds/<%=campground._id%>?_method=PUT" method="POST" class="validated-form">
         <div>
             <label for="title">Title</label>
-            <input tyoe="text" id="title" name="campground[title]" value="<%=campground.title%>">
+            <input tyoe="text" id="title" name="campground[title]" value="<%=campground.title%>" required>
         </div>
         <div>
             <label for="location">Location</label>
-            <input type="text" id="location" name="campground[location]" value="<%=campground.location%>">
+            <input type="text" id="location" name="campground[location]" value="<%=campground.location%>" required>
         </div>
         <button>submit</button>
         <button><a href="/campgrounds/<%=campground._id%>">Back</a></button>
