@@ -2,8 +2,11 @@ const express = require('express');
 //const { default: mongoose, default: mongoose } = require('mongoose');
 const ejsMate = require('ejs-mate')
 const methodOverride = require('method-override');
+const Joi = require('joi')
+const {campgroundSchema} = require('joi');
 const path = require('path');
 const catchAsync = require('./utils/catchAsync.js')
+const ExpressError = require('./utils/ExpressError')
 const mongoose = require('mongoose');
 const Campground = require('./models/campground.js');
 
@@ -48,6 +51,24 @@ app.get('/campgrounds/new', (req, res)=>{
 })
 
 app.post('/campgrounds', catchAsync(async(req, res, next)=>{
+    /// if(!req.body.campground) throw new WxpressError('Invalid campgreound', 404)
+    // const campgroundSchema= Joi.object({
+    //     campground : Joi.object({
+    //         title: Joi.string().required(),
+    //         price: Joi.number().required().min(0),
+    //         image: Joi.string().required(),
+    //         location: Joi.string().require(),
+    //         description: Joi.string().require()
+    //     }).required()
+    // })
+    
+    // const {error} = campgroundSchema.validate(req.body);
+    // if (error){
+    //     const msg = error.details.map(el => el.message).join(',')
+    //     throw new ExpressError(msg, 404)
+    // }
+    // console.log(result);
+    
     const campground = new Campground(req.body.campground);
     await campground.save();
     res.redirect(`/campgrounds/${campground._id}`);
@@ -78,9 +99,14 @@ app.delete('/campgrounds/:id',async(req,res)=>{
     res.redirect('/campgrounds');
 })
 
+app.all("*", (req,res, next)=>{
+    next(new ExpressError('page not found', 404))
+})
 
 app.use((err,req,res,next) =>{
-    res.send('error')
+    const {statusCode=500}=err
+    if(!err.message) err.message ='oh no, something is broken';
+    res.status(statusCode).render('error', {err})
 })
 
 
