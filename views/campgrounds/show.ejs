@@ -1,9 +1,56 @@
 <% layout('layouts/page')%>
+<div class="row">
+    <div class="col-6">
+        <div class="card md-3">
     <div><img src=<%= campground.image %> class="img-thumbnail"> </div>
     <p>$<%= campground.price%></p>
     <p><%= campground.description%></p>
     <h1><%= campground.title %> </h1>
     <h2><%= campground.location %> </h2>
-    <button><a href="/campgrounds/<%=campground.id%>/edit">Edit</a></button>
-    <button><a href="/campgrounds">Back</a></button>
-    <form action="/campgrounds/<%= campground._id %>?_method=DELETE" method="POST"><button>delete</button></form>
+    <a href="/campgrounds/<%=campground.id%>/edit"><button class="btn btn-outline-success mb-3">Edit</button></a>
+    <a href="/campgrounds"><button class="btn btn-outline-secondary mb-3">Back</button></a>
+    <form action="/campgrounds/<%= campground._id %>?_method=DELETE" method="POST"><button class="btn btn-outline-danger">delete</button></form>
+    
+    <form action="/campgrounds/<%=campground._id%>/reviews" method='POST' class="mb-3 validated-form"  novalidate>
+    
+    
+    </div>
+    
+    <div class="col-6"></div>
+    <h2 class="mb-3">Reviews</h2> 
+     <% for(let review of campground.reviews) {%> 
+         <div class="card mb-3 ">
+             <div class="card-body">
+                 <h5 class="card-title"> Rating: <%= review.rating %>  </h5>
+             <p>
+                 Review: <%= review.body %> 
+                 |
+             </p>
+             </div>
+         </div>
+         <% } %>
+     
+     <h1>Leave a Review</h1>
+     <div class="mb-3">
+         
+         <label class='form-label' for="rating">Rating</label>
+         <p>1</p><input class='form-range' type="range" min='1' max='5' name="review[rating]" id="rating"><p>5</p>
+         <div class="valid-feedback">
+             Looks good
+         </div>
+     </div>
+     <div class="mb-3">
+         <label class='form-label' for="body">Review</label>
+         <textarea class='form-control' name="review[body]" id="" cols="30" rows="3" required></textarea>
+         
+     </div>
+     <button action=''class="btn btn-success">Submit</button>
+ </div>
+
+    </div>
+    
+    </div>
+    
+    
+    </form>
+    
