@@ -5,6 +5,7 @@
     <div><img src=<%= campground.image %> class="img-thumbnail"> </div>
     <p>$<%= campground.price%></p>
     <p><%= campground.description%></p>
+    <%=console.log(campground.description)%>
     <h1><%= campground.title %> </h1>
     <h2><%= campground.location %> </h2>
     <a href="/campgrounds/<%=campground.id%>/edit"><button class="btn btn-outline-success mb-3">Edit</button></a>
